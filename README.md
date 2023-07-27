@@ -45,7 +45,7 @@ The project consists of the following components:
 Make sure the files uploaded à re in the same folder as 
 
 **Author:**
-Soulala Achraf
+Soulala Achraf | 
 achrafs758@gmail.com
 
 **License:**
