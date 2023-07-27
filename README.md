@@ -26,7 +26,7 @@ The project consists of the following components:
 **Requirements:**
 
 - Python 3.7 or higher
-- Libraries: pandas, numpy, streamlit, Deepdoctection, Pandas, CGBoost, joblib, NLTK, 
+- Libraries: pandas, numpy, streamlit, Deepdoctection,Detectron2,Pandas, CGBoost, joblib, NLTK, 
 - XGBoost
 - joblib
 
