@@ -14,6 +14,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+import tempfile  # Import tempfile to create a temporary file
 
 analyzer = dd.get_dd_analyzer()
 
@@ -45,11 +46,14 @@ else:
 with st.expander("Pdf importation.", expanded=True):
     file = st.file_uploader("Upload pdf file", type=["pdf"])
     if file is not None:
-                df = analyzer.analyze(path=file.name)
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
+                    temp_pdf.write(file.read())
+                    
+                df = analyzer.analyze(path=temp_pdf.name)
                 df.reset_state()  # This method must be called just before starting the iteration. It is part of the API.
-
+        
                 doc = iter(df)
-                pages=[]
+                pages = []
                 for _ in range(len(df)):
                     page = next(doc)
                     pages.append(page)
@@ -61,7 +65,8 @@ with st.expander("Pdf importation.", expanded=True):
                         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
                     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="700" type="application/pdf">'
                     st.markdown(pdf_display, unsafe_allow_html=True)
-                st.write(show_pdf(file.name))
+                temp_pdf.close()
+                st.write(show_pdf(temp_pdf.name))
                 #number of pages
                 st.write("Number of pages: ", int(len(df)))
                 
