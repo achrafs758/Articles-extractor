@@ -170,7 +170,6 @@ keyring==23.11.0
 kiwisolver==1.4.4
 kmodes==0.12.2
 korean-lunar-calendar==0.3.1
--e git+https://github.com/heartexlabs/label-studio.git@1ae3b64522a18c3256f4e81747257f4acd3e4511#egg=label_studio
 label-studio-converter==0.0.54rc0
 label-studio-tools==0.0.2
 langchain==0.0.184
@@ -284,7 +283,6 @@ pyrsistent==0.19.2
 pytesseract==0.3.10
 python-bidi==0.4.2
 python-dateutil==2.8.1
--e git+https://github.com/mindee/doctr.git@2204a61ef62c8199ca8add758d5b7502b75f1ca5#egg=python_doctr
 python-docx==0.8.11
 python-dotenv==1.0.0
 python-json-logger==2.0.4
@@ -393,11 +391,6 @@ ua-parser==0.16.1
 ujson==5.8.0
 umap-learn==0.5.3
 Unidecode==1.3.6
-uritemplate==4.1.1
-urllib3==1.26.16
-urwid==2.1.2
-user-agents==2.2.0
-validators==0.20.0
 visions==0.7.5
 waitress==2.1.2
 wasabi==1.1.1
@@ -415,8 +408,6 @@ xgboost==1.6.1
 xmljson==0.2.0
 yacs==0.1.8
 yarl==1.8.1
-ydata-profiling==4.0.0
-yellowbrick==1.5
 zipp==3.10.0
 zopfli==0.2.2
 zstandard==0.19.0
