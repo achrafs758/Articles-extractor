@@ -67,8 +67,6 @@ drf-dynamic-fields==0.3.0
 drf-flex-fields==0.9.5
 drf-generators==0.3.0
 drf-yasg==1.20.0
-DS-PLS==0.0.1
-dspls==0.0.1
 emoji==2.1.0
 entrypoints==0.4
 ephem==4.1.4
