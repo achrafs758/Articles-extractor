@@ -120,7 +120,7 @@ numpy==1.23.5
 oauthlib==3.2.2
 omegaconf==2.3.0
 ordered-set==4.0.2
-packaging==21.3
+packaging==22
 pandas==1.5.1
 pandas-profiling==3.6.6
 parso==0.8.3
