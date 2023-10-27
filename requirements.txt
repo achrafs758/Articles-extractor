@@ -10,7 +10,6 @@ cloudpickle==3.0.0
 contourpy==1.1.1
 cycler==0.12.1
 debugpy==1.6.7
--e git+https://github.com/facebookresearch/detectron2.git@898507047cf441a1e4be7a729270961c401c4354#egg=detectron2
 distlib==0.3.7
 filelock==3.12.2
 Flask==2.3.2
