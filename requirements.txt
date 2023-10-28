@@ -1,10 +1,11 @@
-detectron2 @ git+https://github.com/facebookresearch/detectron2.git@ff53992b1985b63bd3262b5a36167098e3dada02
-deepdoctection[pt]
+torchvision==0.15.2
+torch==2.0.1
 numpy
 pandas
 scikit-learn
 nltk
 streamlit
-torchvision==0.15.2
-torch==2.0.1
 altair<5
+detectron2 @ git+https://github.com/facebookresearch/detectron2.git@ff53992b1985b63bd3262b5a36167098e3dada02
+deepdoctection[pt]
+
