@@ -14,6 +14,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+nltk.download('punkt','stopwords')
 import tempfile  # Import tempfile to create a temporary file
 
 analyzer = dd.get_dd_analyzer()

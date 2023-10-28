@@ -1,13 +1,11 @@
 torchvision==0.15.2
-tensorflow==2.12.0
 torch==2.0.1
 numpy
 pandas
-scikit-learn
 nltk
 streamlit
-".[source-pt]" # after git clone 'git+https://github.com/deepdoctection/deepdoctection.git' && cd deepdoctection
-open-cv
+ipython
+#".[source-pt]"  after git clone 'git+https://github.com/deepdoctection/deepdoctection.git' && cd deepdoctection
 tesseract
 # Poppler
 xgboost
