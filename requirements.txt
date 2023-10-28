@@ -1,5 +1,6 @@
-git+https://github.com/deepdoctection/deepdoctection.git
-[source-pt]
+detectron2 @ git+https://github.com/facebookresearch/detectron2.git@ff53992b1985b63bd3262b5a36167098e3dada02
+deepdoctection[pt]
+numpy
 pandas
 scikit-learn
 nltk
@@ -7,4 +8,3 @@ streamlit
 torchvision==0.15.2
 torch==2.0.1
 altair<5
-
