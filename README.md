@@ -1,53 +1,99 @@
 # Articles-extractor
 
-**Description:**
+## Description:
 
-This project aims to extract figures and tables along with their page numbers and bounding boxes from PDF documents. The extracted data is then presented in tabular format using Streamlit for easy visualization.
+Articles-extractor is a project designed to extract figures and tables, along with their page numbers and bounding boxes, from PDF documents. The extracted data is presented in a tabular format using Streamlit for easy visualization.
 
-**Note:**
-Currently, the project is under development, and there are two main issues being addressed:
+### Current Development Status:
 
-1. **Handling Two Blocks on a Page:** The current implementation assumes a single block of content on each page. However, some articles may span multiple blocks across pages. The code is being enhanced to handle such cases and ensure accurate extraction of figures and tables.
+The project is under active development, with a focus on addressing the following key issues:
 
-2. **Improving Layout Model and OCR Accuracy:** The accuracy of the layout model and OCR (Optical Character Recognition) is crucial for precise figure and table extraction. Ongoing efforts are being made to improve the layout model and OCR accuracy to achieve better results.
+1. **Handling Multi-Block Pages:** Enhancements are being made to handle pages with multiple blocks of content, ensuring accurate extraction of figures and tables.
 
-**Project Structure:**
+2. **Improving Layout Model and OCR Accuracy:** Ongoing efforts are dedicated to improving the accuracy of the layout model and Optical Character Recognition (OCR) for precise figure and table extraction.
 
-The project consists of the following components:
+## Project Structure:
 
-1. **PDF Extraction:** A PDF parsing module is used to extract the content, bounding boxes, and page numbers from the PDF documents.
+The project comprises the following components:
 
-2. **Layout Model:** A layout model is employed to identify figures and tables in the extracted content based on their formatting and layout.
+1. **PDF Extraction:** Utilizes a PDF parsing module to extract content, bounding boxes, and page numbers from PDF documents.
 
-3. **OCR (Optical Character Recognition):** OCR is applied to extract captions and labels associated with figures and tables.
+2. **Layout Model:** Employs a layout model to identify figures and tables based on their formatting and layout.
 
-4. **Streamlit Web Application:** The extracted figures and tables along with their corresponding page numbers and bounding boxes are displayed in tabular format using Streamlit, providing an interactive user interface.
+3. **OCR (Optical Character Recognition):** Applies OCR to extract captions and labels associated with figures and tables.
 
-**Requirements:**
+4. **Streamlit Web Application:** Displays extracted figures and tables, along with corresponding page numbers and bounding boxes, in tabular format using Streamlit, providing an interactive user interface.
+
+## Requirements:
+
+Ensure you have the following installed:
 
 - Python 3.7 or higher
-- Libraries: pandas, numpy, streamlit, Deepdoctection,Detectron2,Pandas, CGBoost, joblib, NLTK, 
-- XGBoost
-- joblib
+- Libraries: pandas, numpy, streamlit, Deepdoctection, Detectron2, Pandas, CGBoost, joblib, NLTK, XGBoost
 
+## Installation Guide:
 
-**Instructions:**
+### Install Python:
 
-1. Install the required libraries using `pip install -r requirements.txt`.
+1. Download and install Python 3.7 or a higher version from [Python's official website](https://www.python.org/downloads/).
 
-2. Run the Streamlit application using `streamlit run app.py`.
+### Install Docker (Optional):
 
-3. Upload your PDF documents to the application.
+1. Follow the [official Docker installation guide](https://docs.docker.com/get-docker/) to install Docker.
 
-4. The application will display a table containing figures and another table containing tables, along with their respective page numbers and bounding boxes.
+### Clone the Repository:
 
-**Note:** The project is continuously being improved, and updates will be made to address the aforementioned issues and enhance the overall functionality and accuracy of the figure and table extraction process. Feedback and contributions are welcome.
-Make sure the files uploaded à re in the same folder as 
+1. Open a terminal or command prompt.
 
-**Author:**
+2. Run the following command to clone the repository:
+
+    ```bash
+    git clone https://github.com/your-username/Articles-extractor.git
+    ```
+
+### Install Project Dependencies:
+
+1. Navigate to the project directory:
+
+    ```bash
+    cd Articles-extractor
+    ```
+
+2. Run the following command to install the required libraries:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Usage with Docker:
+
+1. Run the following command to build the Docker image:
+
+    ```bash
+    docker-compose build
+    ```
+
+2. After the build is complete, use the following command to run the application:
+
+    ```bash
+    docker-compose up
+    ```
+
+3. Access the application in your web browser at `http://localhost:8501`.
+
+4. Upload your PDF documents to the application.
+
+5. The application will display tables containing figures and tables, along with their respective page numbers and bounding boxes.
+
+## Note:
+
+Make sure the files uploaded are in the same folder as the application.
+
+## Author:
+
 Soulala Achraf | 
-achrafs758@gmail.com
+Email: achrafs758@gmail.com
 
-**License:**
+## License:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

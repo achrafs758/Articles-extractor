@@ -15,7 +15,9 @@ import time  # Import the time module
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
+from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+nltk.download('punkt','stopwords')
 import tempfile  # Import tempfile to create a temporary file
 
 
@@ -121,8 +123,6 @@ if analyze_pdf_button:
 
     # Additional information or actions after PDF analysis
     # You can add more code here if needed.
-
-with st.expander("Informations du PDF.", expanded=True):
     if file is not None and st.session_state.new_file and st.session_state.pages is not None:
         st.session_state.pages = pages
         # number of pages
@@ -141,8 +141,31 @@ with st.expander("Informations du PDF.", expanded=True):
         # Load Spacy Model
         # spacy_model = spacy.load("./spacy-model/model-best")
 
+        def preprocess_text(text):
+            """This utility function sanitizes a string by:
+            - removing links
+            - removing special characters
+            - removing numbers
+            - removing stopwords
+            - transforming in lowercase
+            - removing excessive whitespaces
+            Args:
+                text (str): the input text you want to clean
+                remove_stopwords (bool): whether or not to remove stopwords
+            Returns:
+                str: the cleaned text
+            """
+
+            text = re.sub("[^A-Za-z]+", " ", text)
+            tokens = nltk.word_tokenize(text)
+            tokens = [w for w in tokens if not w.lower() in stopwords.words("french")]
+            text = " ".join(tokens)
+            text = text.lower().strip()
+            text = ' '.join([stemmer.stem(word) for word in text.split()])
+            return text
+
         def predict(model, article):
-            article_preprocessed = (article)
+            article_preprocessed = preprocess_text(article)
             article_preprocessed = ' '.join([stemmer.stem(word) for word in article_preprocessed.split()])
             tfidf_article = tfidf_vectorizer.transform([article_preprocessed])
             prediction = model.predict(tfidf_article)
@@ -199,9 +222,10 @@ with st.expander("Informations du PDF.", expanded=True):
             return page_data
 
         # Usage of the modified process_page function
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            pages_data = list(
-                executor.map(process_page, enumerate(zip(pages, pages[1:]))))
+        pages_data = []
+        for page_number, (page, next_page) in enumerate(zip(pages, pages[1:])):
+            page_data = process_page((page_number, (page, next_page)))
+            pages_data.append(page_data)
 
 
         # Concaténer les données de chaque page
@@ -209,9 +233,6 @@ with st.expander("Informations du PDF.", expanded=True):
         for page_data in pages_data:
             article_data.extend(page_data)
 
-        dt = pd.DataFrame(article_data)
-        st.session_state.dt = dt
-        st.session_state.new_file = False
         count1 = 0
         count3 = 0
         count4 = 0
@@ -227,37 +248,55 @@ with st.expander("Informations du PDF.", expanded=True):
                     count5 += 1
             for table in page.tables:
                 count4 += 1
+                
+        dt = pd.DataFrame(article_data)
 
+        texts = [page.text for page in pages]
+        all_text = '\n'.join(texts)
+        st.session_state.dt = dt
+        st.session_state.new_file = False
+        st.session_state.count1=count1
+        st.session_state.count3=count3
+        st.session_state.count4=count4
+        st.session_state.count5=count5
+        st.session_state.all_text=all_text
+
+with st.expander("Informations du PDF.", expanded=True):
+    if st.session_state.dt is not None:
+        dt = st.session_state.dt
+        count1=st.session_state.count1
+        count3=st.session_state.count1
+        count4=st.session_state.count4
+        count5=st.session_state.count5
+        all_text=st.session_state.all_text
         st.write("Nombre d'articles : ", int(len(dt)))
         st.write("Nombre de titres : ", int(count1))
         st.write("Nombre de listes : ", int(count3))
         st.write("Nombre de figures : ", int(count5))
         st.write("Nombre de tables : ", int(count4))
 
-        texts = [page.text for page in pages]
-        all_text = '\n'.join(texts)
         st.download_button("⬇️ Télécharger l'intégralité du contenu du PDF en tant que texte", all_text, "text.txt",
                             "text/plain",
                             use_container_width=True)
 
 with st.expander("Affichage des articles et leur classe.", expanded=True):
-    if dt is not None:
-        if st.session_state.dt is not None:
-            
-            def highlight_greaterthan(row, token_to_highlight=None):
-                # iterate on 
-                styles = ['background-color: #a24857 ' if token_to_highlight in str(row['Contenu']) else '' for _ in row.index]
-                return styles
+    if st.session_state.dt is not None:
+        dt = st.session_state.dt
 
-            dt = st.session_state.dt
-            prompt = st.text_input("Entrez un mot à mettre en surbrillance dans les articles.")
-            
-            if prompt:
-                st.dataframe(dt.style.apply(highlight_greaterthan, token_to_highlight=prompt, axis=1))
-            else:
-                st.dataframe(dt)
-            st.download_button("⬇️ Télécharger les articles en tant que .csv", dt.to_csv(), "annotated.csv", use_container_width=True)
+        def highlight_greaterthan(row, token_to_highlight=None):
+            # iterate on 
+            styles = ['background-color: #a24857 ' if token_to_highlight in str(row['Contenu']) else '' for _ in row.index]
+            return styles
+
+        dt = st.session_state.dt
+        prompt = st.text_input("Entrez un mot à mettre en surbrillance dans les articles.")
         
+        if prompt:
+            st.dataframe(dt.style.apply(highlight_greaterthan, token_to_highlight=prompt, axis=1))
+        else:
+            st.dataframe(dt)
+        st.download_button("⬇️ Télécharger les articles en tant que .csv", dt.to_csv(), "annotated.csv", use_container_width=True)
+    
     # Display the data frame
         # Process each page
         # add a section of articles, table, lists, figures count
